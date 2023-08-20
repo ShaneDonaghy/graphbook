@@ -19,6 +19,7 @@ type Chat {
     id: Int
     messages: [Message]
     users: [User]
+    lastMessage: Message
 }
 type RootQuery {
     posts: [Post]

@@ -26,6 +26,19 @@ const ADD_POST = gql`
 
 const Feed = () => {
     const [addPost] = useMutation(ADD_POST, {
+        optimisticResponse: {
+            __typename: "mutation",
+            addPost: {
+                __typename: "Post",
+                text: postContent,
+                id: -1,
+                user: {
+                    __typename: "User",
+                    username: "Loading . . .",
+                    avatar: "/public/fixed/loading.gif"
+                }
+            }
+        },
         update(cache, { data: { addPost } }) {
             cache.modify({
                 fields: {
