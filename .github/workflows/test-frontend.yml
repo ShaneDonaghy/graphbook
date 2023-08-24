@@ -11,4 +11,4 @@
       steps:
         - name: Run a one-line script
           uses: actions/checkout@v2
-          run: echo Hello World!
+        - run: echo Hello World!
