@@ -9,6 +9,9 @@ type Post {
     text: String
     user: User
 }
+type PostFeed {
+    posts: [Post]
+}
 type Message {
     id: Int
     text: String
@@ -25,6 +28,7 @@ type RootQuery {
     posts: [Post]
     chats: [Chat]
     chat(chatId: Int): Chat
+    postsFeed (page: Int, limit: Int): PostFeed
 }
 input PostInput {
     text: String!
