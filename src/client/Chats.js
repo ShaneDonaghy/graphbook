@@ -3,17 +3,17 @@ import { gql, useQuery } from '@apollo/client';
 import Chat from './Chat';
 
 const GET_CHATS = gql`{
-chats {
-    id
-    users {
+    chats {
         id
-        avatar
-        username
+        users {
+            id
+            avatar
+            username
+        }
+        lastMessage {
+            text
+        }
     }
-    lastMessage {
-        text
-    }
-}
 }`;
 
 const usernamesToString = (users) => {
