@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import Chat from './Chat';
+import Loading from './components/loading'
 
 const GET_CHATS = gql`{
 chats {
@@ -54,7 +55,7 @@ const Chats = () => {
     }
     const { loading, error, data } = useQuery(GET_CHATS);
     if (loading) {
-        return <div className="chats"><p>Loading . . .</p></div>
+        return <Loading />;
     }
     if (error) {
         return <div className="chats"><p>{error.message}</p></div>
