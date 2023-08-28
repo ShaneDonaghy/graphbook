@@ -22,7 +22,7 @@ When(/^I type (.*) in the (.*) text field$/, async (message, field) => {
             elem = await HomePage.postTextBox;
             break;
         case 'chat':
-            //not here yet
+            elem = await HomePage.chatWindowTextField;
             break;
         default:
             console.error('FIELD NOT FOUND');
@@ -61,5 +61,9 @@ When(/^I press (.*) key$/, async (key) => {
     }
 });
 Then(/^the bottom chat message will contain (.*)$/, async (msg) => {
-
+    await browser.pause(500);
+    let numMessages = await HomePage.myChatMessages.length;
+    let myLastMessage = await HomePage.myChatMessages[numMessages - 1].getText();
+    console.log('My Last Message: ' + myLastMessage);
+    await expect(myLastMessage).toEqual(msg);
 });

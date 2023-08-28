@@ -1,5 +1,6 @@
 Feature: Test Chat Feature Feature
 
+  @debug
   Scenario Outline: As a user, I want to be able to send a chat message on Graphbook
 
     Given I am on the home page

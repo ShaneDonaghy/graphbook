@@ -22,6 +22,9 @@ class HomePage extends Page {
     get chatWindow(){
         return browser.$$('div.chatWindow');
     }
+    get chatWindowTextField(){
+        return browser.$('div.input input');
+    }
 }
 
 module.exports = new HomePage();
