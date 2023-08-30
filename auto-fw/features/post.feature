@@ -11,4 +11,3 @@ Feature: Test Post Feature
       | message                       |
       | Automated Test Posting        |
       | Second Automated Test Posting |
-
