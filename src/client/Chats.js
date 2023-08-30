@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import Chat from './Chat';
-import Loading from './components/loading'
+import Loading from './components/loading';
+import Error from './components/error';
+import { GET_CHATS } from '../server/apollo/queries/getChats';
 
-const GET_CHATS = gql`{
-chats {
-    id
-    users {
-        id
-        avatar
-        username
-    }
-    lastMessage {
-        text
-    }
-}
-}`;
+// const GET_CHATS = gql`{
+// chats {
+//     id
+//     users {
+//         id
+//         avatar
+//         username
+//     }
+//     lastMessage {
+//         text
+//     }
+// }
+// }`;
 
 const usernamesToString = (users) => {
     const userList = users.slice(1);
@@ -58,7 +60,7 @@ const Chats = () => {
         return <Loading />;
     }
     if (error) {
-        return <div className="chats"><p>{error.message}</p></div>
+        return <Error><p>{error.message}</p></Error>;
     }
     const { chats } = data;
 

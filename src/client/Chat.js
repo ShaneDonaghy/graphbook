@@ -1,38 +1,9 @@
 import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import Loading from './components/loading';
-
-const GET_CHAT = gql`
-query chat($chatId: Int!) {
-    chat(chatId: $chatId) {
-        id
-        users {
-            id
-            avatar
-            username
-        }
-        messages {
-            id
-            text
-            user {
-                id
-            }
-        }
-    }
-}
-`;
-
-const ADD_MESSAGE = gql`
-    mutation addMessage($message: MessageInput!) {
-        addMessage(message: $message) {
-            id
-            text
-            user {
-                id
-            }
-        }
-    }
-`;
+import Error from './components/error';
+import { GET_CHAT } from '../server/apollo/queries/getChat';
+import { ADD_MESSAGE } from '../server/apollo/mutations/addMessage';
 
 const Chat = (props) => {
     const { chatId, closeChat } = props;
@@ -71,9 +42,7 @@ const Chat = (props) => {
     }
 
     if (loading) return <Loading />;
-    if (error) return <div className="chatWindow">
-        <p>{error.message}</p>
-    </div>;
+    if (error) return <Error><p>{error.message}</p></Error>;
     const { chat } = data;
 
     return (
