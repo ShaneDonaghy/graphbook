@@ -24,6 +24,9 @@ type Chat {
     users: [User]
     lastMessage: Message
 }
+type Response {
+    success: Boolean
+}
 type RootQuery {
     posts: [Post]
     chats: [Chat]
@@ -54,6 +57,9 @@ type RootMutation {
     addMessage (
         message: MessageInput!
     ): Message
+    deletePost (
+        postId: Int!
+    ): Response
 }
 schema {
     query: RootQuery,

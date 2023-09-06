@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import Feed from './Feed';
 import Chats from './Chats';
 import '../../assets/styles.css';
+import './components/fontawesome';
 
 const App = () => {
     return (
