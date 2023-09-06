@@ -2,12 +2,8 @@ const { Given, When, Then } = require('@wdio/cucumber-framework');
 const { expect, browser } = require('@wdio/globals');
 const HomePage = require('../pageobjects/home.page');
 
-// const pages = {
-//     home: HomePage
-// }
-
 Given(/^I am on the (\w+) page$/, async (page) => {
-    switch(page){
+    switch (page) {
         case 'home':
             await HomePage.open();
             await HomePage.postTextBox.waitForDisplayed();
@@ -17,7 +13,7 @@ Given(/^I am on the (\w+) page$/, async (page) => {
 
 When(/^I type (.*) in the (.*) text field$/, async (message, field) => {
     let elem;
-    switch(field){
+    switch (field) {
         case 'post':
             elem = await HomePage.postTextBox;
             break;
@@ -40,7 +36,7 @@ Then(/^the top post will contain (.*)$/, async (message) => {
 });
 When(/^I open the (.*) chat window$/, async (ord) => {
     let elem;
-    switch(ord){
+    switch (ord) {
         case 'top':
             elem = await HomePage.openChats[0];
             break;
@@ -54,7 +50,7 @@ When(/^I open the (.*) chat window$/, async (ord) => {
     await HomePage.chatWindow[0].waitForDisplayed();
 });
 When(/^I press (.*) key$/, async (key) => {
-    switch(key){
+    switch (key) {
         case 'enter':
             await browser.keys('\uE007');
             break;

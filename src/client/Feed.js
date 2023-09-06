@@ -5,48 +5,15 @@ import Post from './components/post';
 import Loading from './components/loading';
 import Error from './components/error';
 import { GET_POSTS } from '../server/apollo/queries/getPosts';
-import { ADD_POST } from '../server/apollo/mutations/addPost';
+// import { ADD_POST, getAddPostConfig } from '../server/apollo/mutations/addPost';
+import { useAddPostMutation } from '../server/apollo/mutations/addPost';
 
 const Feed = () => {
-    const [addPost] = useMutation(ADD_POST, {
-        optimisticResponse: {
-            __typename: "mutation",
-            addPost: {
-                __typename: "Post",
-                text: postContent,
-                id: -1,
-                user: {
-                    __typename: "User",
-                    username: "Loading . . .",
-                    avatar: "/public/fixed/loading.gif"
-                }
-            }
-        },
-        update(cache, { data: { addPost } }) {
-            cache.modify({
-                fields: {
-                    postsFeed(existingPostsFeed) {
-                        const { posts: existingPosts } = existingPostsFeed;
-                        const newPostRef = cache.writeFragment({
-                            data: addPost,
-                            fragment: gql`
-                                fragment NewPost on Post {
-                                    id
-                                    type
-                                }
-                            `
-                        });
-                        return {
-                            ...existingPostsFeed,
-                            posts: [newPostRef, ...existingPosts]
-                        };
-                    }
-                }
-            });
-        }
-    });
+
+    // const [addPost] = useMutation(ADD_POST, getAddPostConfig(postContent));
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(0);
+    const [addPost] = useAddPostMutation(postContent);
     const loadMore = (fetchMore) => {
         const self = this;
         fetchMore({

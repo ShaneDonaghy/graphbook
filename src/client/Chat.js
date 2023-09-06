@@ -3,7 +3,8 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import Loading from './components/loading';
 import Error from './components/error';
 import { GET_CHAT } from '../server/apollo/queries/getChat';
-import { ADD_MESSAGE } from '../server/apollo/mutations/addMessage';
+import { useAddMessageMutation } from '../server/apollo/mutations/addMessage';
+
 
 const Chat = (props) => {
     const { chatId, closeChat } = props;
@@ -11,27 +12,7 @@ const Chat = (props) => {
         variables: { chatId }
     });
     const [text, setText] = useState('');
-    const [addMessage] = useMutation(ADD_MESSAGE, {
-        update(cache, { data: { addMessage } }) {
-            cache.modify({
-                id: cache.identify(data.chat),
-                fields: {
-                    messages(existingMessages = []) {
-                        const newMessageRef = cache.writeFragment({
-                            data: addMessage,
-                            fragment: gql`
-                            fragment NewMessage on Chat {
-                                id
-                                type
-                            }
-                            `
-                        });
-                        return [...existingMessages, newMessageRef];
-                    }
-                }
-            });
-        }
-    });
+    const [addMessage] = useAddMessageMutation(data);
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter' && text.length) {

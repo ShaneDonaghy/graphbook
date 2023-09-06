@@ -5,20 +5,6 @@ import Loading from './components/loading';
 import Error from './components/error';
 import { GET_CHATS } from '../server/apollo/queries/getChats';
 
-// const GET_CHATS = gql`{
-// chats {
-//     id
-//     users {
-//         id
-//         avatar
-//         username
-//     }
-//     lastMessage {
-//         text
-//     }
-// }
-// }`;
-
 const usernamesToString = (users) => {
     const userList = users.slice(1);
     let usernamesString = '';
