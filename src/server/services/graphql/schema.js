@@ -27,11 +27,15 @@ type Chat {
 type Response {
     success: Boolean
 }
+type UsersSearch {
+    users: [User]
+}
 type RootQuery {
     posts: [Post]
     chats: [Chat]
     chat(chatId: Int): Chat
     postsFeed (page: Int, limit: Int): PostFeed
+    usersSearch(page: Int, limit: Int, text: String!): UsersSearch
 }
 input PostInput {
     text: String!

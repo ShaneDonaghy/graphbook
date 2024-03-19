@@ -1,0 +1,16 @@
+{
+  "name": "Graphbook API testing framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [],
+  "author": "Shane Donaghy",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^9.5.1",
+    "pactum": "^3.5.1"
+  }
+}
